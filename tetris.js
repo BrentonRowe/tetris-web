@@ -92,6 +92,44 @@
   const downBtn = document.getElementById("downBtn");
   const rotateBtn = document.getElementById("rotateBtn");
 
+  function clamp(n, min, max) {
+    return Math.max(min, Math.min(max, n));
+  }
+
+  function setResponsiveBoardSize() {
+    const canvasWrap = document.querySelector(".canvasWrap");
+    const topbar = document.querySelector(".topbar");
+    const controls = document.querySelector(".controls");
+
+    if (!canvasWrap || !topbar || !controls) return;
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // Measure real rendered UI, then fit the 1:2 board into remaining space.
+    const topbarH = topbar.getBoundingClientRect().height;
+    const controlsH = controls.getBoundingClientRect().height;
+
+    // Gaps/padding allowance (app padding + stage gap + breathing room)
+    const chromePadding = 44;
+
+    const availableH = Math.max(320, vh - topbarH - controlsH - chromePadding);
+    const maxBoardWFromHeight = Math.floor(availableH / 2);
+    const maxBoardWFromWidth = Math.floor(vw * 0.92);
+
+    const isTablet = Math.min(vw, vh) >= 700;
+    const hardMax = isTablet ? 420 : 340;
+    const hardMin = isTablet ? 260 : 240;
+
+    const boardW = clamp(
+      Math.min(hardMax, maxBoardWFromHeight, maxBoardWFromWidth),
+      hardMin,
+      hardMax
+    );
+
+    document.documentElement.style.setProperty("--board-width", `${boardW}px`);
+  }
+
   /** @type {number[][]} */
   let grid;
 
@@ -466,6 +504,14 @@
   );
 
   // Start
+  // Size the board to fit the viewport (important on iPhone/iPad).
+  // Do this before the first frame so layout is stable.
+  setResponsiveBoardSize();
+  window.addEventListener("resize", () => {
+    // Allow the browser a tick to finish reflow (esp. after orientation change).
+    window.requestAnimationFrame(setResponsiveBoardSize);
+  });
+
   reset();
   updateHud();
   requestAnimationFrame(frame);

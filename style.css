@@ -1,5 +1,6 @@
 :root {
   color-scheme: dark;
+  --board-width: 320px;
 }
 
 /* Make the HTML `hidden` attribute unbreakable */
@@ -73,7 +74,7 @@ body {
 
 .canvasWrap {
   position: relative;
-  width: min(92vw, 360px);
+  width: min(92vw, var(--board-width));
   margin: 0 auto;
 }
 
@@ -155,12 +156,12 @@ canvas {
 }
 
 .ctrl {
-  height: 56px;
+  height: clamp(44px, 7vh, 56px);
   border-radius: 14px;
   border: 1px solid #666;
   background: #111;
   color: #fff;
-  font-size: 22px;
+  font-size: clamp(18px, 3.2vh, 22px);
   font-weight: 800;
   -webkit-tap-highlight-color: transparent;
 }
@@ -180,4 +181,25 @@ canvas {
   opacity: 0.75;
   text-align: center;
   line-height: 1.35;
+}
+
+/* Tablet layout (iPad 11 etc): put controls beside board */
+@media (min-width: 820px) {
+  .stage {
+    grid-template-columns: auto 340px;
+    align-items: start;
+  }
+
+  .canvasWrap {
+    margin: 0;
+  }
+
+  .controls {
+    width: 100%;
+    margin: 0;
+  }
+
+  .help {
+    text-align: left;
+  }
 }

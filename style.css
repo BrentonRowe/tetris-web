@@ -1,0 +1,183 @@
+:root {
+  color-scheme: dark;
+}
+
+/* Make the HTML `hidden` attribute unbreakable */
+[hidden] {
+  display: none !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  touch-action: manipulation;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hudItem {
+  display: grid;
+  gap: 2px;
+  text-align: right;
+}
+
+.hudLabel {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.hudValue {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.stage {
+  display: grid;
+  gap: 12px;
+}
+
+.canvasWrap {
+  position: relative;
+  width: min(92vw, 360px);
+  margin: 0 auto;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #000;
+  border: 2px solid #444;
+  border-radius: 10px;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 10px;
+}
+
+.overlayCard {
+  width: min(90%, 280px);
+  background: rgba(20, 20, 20, 0.92);
+  border: 1px solid #444;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+
+.overlayTitle {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.overlaySub {
+  font-size: 13px;
+  opacity: 0.9;
+  margin-bottom: 12px;
+}
+
+.overlayActions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid #666;
+  background: #111;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn.primary {
+  border-color: #1a73e8;
+  background: #1a73e8;
+}
+
+.controls {
+  width: min(92vw, 420px);
+  margin: 0 auto;
+  display: grid;
+  gap: 10px;
+}
+
+.controlsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.ctrl {
+  height: 56px;
+  border-radius: 14px;
+  border: 1px solid #666;
+  background: #111;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ctrl.wide {
+  grid-column: 1 / -1;
+}
+
+.ctrl:active {
+  transform: translateY(1px);
+  background: #1b1b1b;
+}
+
+.help {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.75;
+  text-align: center;
+  line-height: 1.35;
+}
